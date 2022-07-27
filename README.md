@@ -1,6 +1,6 @@
 # triodomino-frontend
 
-[![CI](https://github.com/leonkorth/triodomino-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/leonkorth/triodomino-frontend/actions/workflows/ci.yml)
+[![CI](https://github.com/leonkorth/triodomino-frontend/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/leonkorth/triodomino-frontend/actions/workflows/ci.yml)
 
 ## Project setup
 ```
