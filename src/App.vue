@@ -29,5 +29,11 @@ export default {
   color: #1cff00;
 }
 
+.tri-logo{
+  width: 20%;
+  height: auto;
+  alignment: right ;
+}
+
 
 </style>
