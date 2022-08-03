@@ -6,11 +6,15 @@
   <div class="container">
     <img src="../assets/tri-logo.jpeg"  class="tri-logo" alt="EEEE">
   </div>
+  <RegelnCanvas></RegelnCanvas>
+
 </template>
 
 <script>
+import RegelnCanvas from '@/components/RegelnCanvas'
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  components: { RegelnCanvas }
 }
 </script>
 
