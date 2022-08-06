@@ -9,6 +9,8 @@
         <div class="navbar-nav">
           <router-link class="nav-link" to="/Home">Home</router-link>
           <router-link class="nav-link" to="/Spiel">Spiel</router-link>
+          <router-link class="nav-link" to="/Scoreboard">Scoreboard</router-link>
+
         </div>
       </div>
     </div>
