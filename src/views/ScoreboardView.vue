@@ -1,12 +1,14 @@
 <template>
 <h1>Scoreboard</h1>
   <h3>Alle Spieler:</h3>
-  {{this.players}}
+  <PlayerTable :players=this.players></PlayerTable>
 </template>
 
 <script>
+import PlayerTable from '@/components/PlayerTable'
 export default {
   name: 'ScoreboardView',
+  components: { PlayerTable },
   data () {
     return {
       loaded: false,
