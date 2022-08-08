@@ -6,7 +6,8 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Geschlecht</th>
-        <th scope="col">Punkte</th>
+        <th scope="col">Punkte pro Spiel</th>
+        <th scope="col">Siege</th>
       </tr>
       </thead>
       <tbody>
@@ -17,6 +18,7 @@
           <span v-if="player.gender === 'FEMALE'">W</span>
           <span v-else-if="player.gender === 'MALE'">M</span>
         </td>
+        <td>0</td>
         <td>0</td>
       </tr>
       </tbody>
