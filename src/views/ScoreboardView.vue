@@ -1,7 +1,7 @@
 <template>
 <h1>Scoreboard</h1>
   <h3>Alle Spieler:</h3>
-  <PlayerTable :players=this.players></PlayerTable>
+  <PlayerTable :players=this.playerStats></PlayerTable>
 </template>
 
 <script>
@@ -12,7 +12,8 @@ export default {
   data () {
     return {
       loaded: false,
-      players: []
+      players: [],
+      playerStats: []
     }
   },
   methods: {
@@ -31,10 +32,25 @@ export default {
           })
         })
         .catch(error => console.log('error', error))
+    },
+    getStatsForAllPlayers () {
+      const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/stats/players'
+      const requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      }
+
+      fetch(endpoint,requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          this.playerStats = result
+        })
+        .catch(error => console.log('error', error))
     }
   },
   mounted () {
     this.getPlayers()
+    this.getStatsForAllPlayers()
   }
 }
 
