@@ -2,6 +2,9 @@
 <h1>Scoreboard</h1>
   <h3>Alle Spieler:</h3>
   <PlayerTable :players=this.playerStats></PlayerTable>
+  <div id="loading-progress-scoreboard" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </template>
 
 <script>
@@ -34,6 +37,7 @@ export default {
         .catch(error => console.log('error', error))
     },
     getStatsForAllPlayers () {
+      this.makeLoadingButtonVisble()
       const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/stats/players'
       const requestOptions = {
         method: 'GET',
@@ -44,8 +48,17 @@ export default {
         .then(response => response.json())
         .then(result => {
           this.playerStats = result
+          this.makeLoadingButtonInvisble()
         })
         .catch(error => console.log('error', error))
+    },
+    makeLoadingButtonVisble () {
+      document.getElementById("loading-progress-scoreboard").classList.remove('invisible')
+      document.getElementById("loading-progress-scoreboard").classList.add('visible')
+    },
+    makeLoadingButtonInvisble () {
+      document.getElementById('loading-progress-scoreboard').classList.remove('visible')
+      document.getElementById('loading-progress-scoreboard').classList.add('invisible')
     }
   },
   mounted () {
