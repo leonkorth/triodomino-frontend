@@ -37,7 +37,7 @@ export default {
         .catch(error => console.log('error', error))
     },
     getStatsForAllPlayers () {
-      this.makeLoadingButtonVisble()
+      this.makeLoadingButtonVisible()
       const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/stats/players'
       const requestOptions = {
         method: 'GET',
@@ -48,15 +48,15 @@ export default {
         .then(response => response.json())
         .then(result => {
           this.playerStats = result
-          this.makeLoadingButtonInvisble()
+          this.makeLoadingButtonInvisible()
         })
         .catch(error => console.log('error', error))
     },
-    makeLoadingButtonVisble () {
+    makeLoadingButtonVisible () {
       document.getElementById("loading-progress-scoreboard").classList.remove('invisible')
       document.getElementById("loading-progress-scoreboard").classList.add('visible')
     },
-    makeLoadingButtonInvisble () {
+    makeLoadingButtonInvisible () {
       document.getElementById('loading-progress-scoreboard').classList.remove('visible')
       document.getElementById('loading-progress-scoreboard').classList.add('invisible')
     }
