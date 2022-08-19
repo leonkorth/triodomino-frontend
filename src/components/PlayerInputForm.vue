@@ -4,15 +4,15 @@
       <div class="row justify-content-start container">
         <div class="col-lg-4 my-1">
           <div class="form-floating" >
-            <input type="text" class="form-control" id="floatingInputGrid" placeholder="Neuen Spieler hinzufügen...">
+            <input v-model="playerTextInput" type="text" class="form-control" id="floatingInputGrid" placeholder="Neuen Spieler hinzufügen...">
             <label  for="floatingInputGrid">Neuen Spieler hinzufügen</label>
           </div>
         </div>
         <div class="col-lg-4 my-1">
           <div class="form-floating">
-            <select class="form-select" id="floatingSelectGrid">
-              <option class="text-center"  style="text-align-last: center" value="" selected disabled>Spieler auswählen</option>
-              <option v-for="player in this.players" :key="player.id" :value="player.id">
+            <select v-model="playerSelectInput" class="form-select" id="floatingSelectGridPlayerInputForm">
+              <option class="text-center"  value="" selected disabled>Spieler auswählen</option>
+              <option v-for="player in filterPlayersWhoAreAlreadyChosen()" :key="player.id" :value="{id: player.id, name: player.name}">
                 {{ player.name }}
               </option>
             </select>
@@ -22,14 +22,23 @@
       </div>
       <div class="row justify-content-start container">
         <div class="col-lg-4 my-1">
-          <button type="submit" class="btn btn-primary">Hinzufügen</button>
+          <button type="button" class="btn btn-primary" @click="saveNewPlayer()">Hinzufügen</button>
         </div>
         <div class="col-lg-4 my-1">
-          <button type="submit" class="btn btn-primary">Hinzufügen</button>
+          <button type="button" class="btn btn-primary" @click="saveSelectedPlayer()">Hinzufügen</button>
         </div>
       </div>
     </form>
   </div>
+  <h3>Alle Spieler</h3>
+  {{this.players}}
+  <h3>Ausgewählte Spieler</h3>
+  {{this.chosenPlayers}}
+  <h3>Ausgewählte Spieler Text</h3>
+  {{this.playerTextInput}}
+  <h3>Ausgewählte Spieler Select</h3>
+  {{this.playerSelectInput}}
+
 </template>
 
 <script>
@@ -37,7 +46,10 @@ export default {
   name: 'PlayerInputForm',
   data () {
     return {
-      players: []
+      players: [],
+      chosenPlayers: [],
+      playerTextInput: '',
+      playerSelectInput: ''
     }
   },
   methods: {
@@ -56,7 +68,67 @@ export default {
           })
         })
         .catch(error => console.log('error', error))
+    },
+    saveNewPlayer () {
+
+
+      if(!this.isPlayerNameAlreadyUsed(this.playerTextInput)){
+
+        const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/players'
+        const data = {
+          name: this.playerTextInput.toLowerCase().trim()
+        }
+        const requestOptions = {
+          method: 'POST',
+          redirect: 'follow',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        fetch(endpoint, requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data)
+
+            // location.reload()
+
+            this.players.push(data)
+            this.chosenPlayers.push(data)
+            this.playerTextInput = ''
+
+
+          })
+          .catch(error => console.log('error', error))
+      } else console.error('Spieler ist schon vorhanden!')
+
+
+
+
+    },
+    isPlayerNameAlreadyUsed (playerName) {
+
+      return this.players.map(player => player.name.toLowerCase().trim()).includes(playerName.toLowerCase().trim())
+
+    },
+    filterPlayersWhoAreAlreadyChosen () {
+
+      const newList = []
+
+      this.players.forEach(
+        player => {
+           if(!this.chosenPlayers.map(player => player.name).includes(player.name)) newList.push(player)
+        }
+      )
+      return newList
+    },
+    saveSelectedPlayer () {
+
+      this.chosenPlayers.push(this.playerSelectInput)
+      const element = document.getElementById('floatingSelectGridPlayerInputForm')
+      element.value = ''
     }
+
   },
   mounted () {
     this.getPlayers()
