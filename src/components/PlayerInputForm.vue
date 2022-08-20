@@ -30,24 +30,26 @@
       </div>
     </form>
   </div>
-  <div>
-    <h3>Alle Spieler</h3>
-
-  </div>
-  <h3>Alle Spieler</h3>
-  {{this.players}}
-  <h3>Ausgewählte Spieler</h3>
-  {{this.chosenPlayers}}
-  <h3>Ausgewählte Spieler Text</h3>
-  {{this.playerTextInput}}
-  <h3>Ausgewählte Spieler Select</h3>
-  {{this.playerSelectInput}}
+      <div class="container d-flex justify-content-start">
+        <h3>Alle Spieler</h3>
+      </div>
+      <div class="d-flex justify-content-start">
+        <PlayerTable :players="this.players"></PlayerTable>
+      </div>
+      <div class="container d-flex justify-content-start">
+        <h3>Ausgewählte Spieler</h3>
+      </div>
+      <div class="d-flex justify-content-start">
+        <PlayerTable :players="this.chosenPlayers"></PlayerTable>
+      </div>
 
 </template>
 
 <script>
+import PlayerTable from '@/components/PlayerTable'
 export default {
   name: 'PlayerInputForm',
+  components: { PlayerTable },
   data () {
     return {
       players: [],

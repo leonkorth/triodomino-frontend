@@ -1,17 +1,17 @@
 <template>
 <h1>Scoreboard</h1>
   <h3>Alle Spieler:</h3>
-  <PlayerTable :players=this.playerStats></PlayerTable>
+  <PlayerStatsTable :players=this.playerStats></PlayerStatsTable>
   <div id="loading-progress-scoreboard" class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
 </template>
 
 <script>
-import PlayerTable from '@/components/PlayerStatsTable'
+import PlayerStatsTable from '@/components/PlayerStatsTable'
 export default {
   name: 'ScoreboardView',
-  components: { PlayerTable },
+  components: { PlayerStatsTable },
   data () {
     return {
       loaded: false,

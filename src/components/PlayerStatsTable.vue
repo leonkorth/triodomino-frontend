@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'PlayerTable',
+  name: 'PlayerStatsTable',
   props: ['players']
 }
 </script>
