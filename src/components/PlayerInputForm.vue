@@ -13,7 +13,7 @@
             <select v-model="playerSelectInput" class="form-select" id="floatingSelectGridPlayerInputForm">
               <option class="text-center"  value="" selected disabled>Spieler auswählen</option>
               <option v-for="player in filterPlayersWhoAreAlreadyChosen()" :key="player.id" :value="{id: player.id, name: player.name}">
-                {{ player.name }}
+                {{ capitalizeFirstLetter(player.name) }}
               </option>
             </select>
           </div>
@@ -29,6 +29,10 @@
         </div>
       </div>
     </form>
+  </div>
+  <div>
+    <h3>Alle Spieler</h3>
+
   </div>
   <h3>Alle Spieler</h3>
   {{this.players}}
@@ -127,6 +131,9 @@ export default {
       this.chosenPlayers.push(this.playerSelectInput)
       const element = document.getElementById('floatingSelectGridPlayerInputForm')
       element.value = ''
+    },
+    capitalizeFirstLetter (string) {
+      return string?.charAt(0).toUpperCase() + string?.slice(1)
     }
 
   },
