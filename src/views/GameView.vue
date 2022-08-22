@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import PlayerInputForm from '@/components/PlayerInputForm'
+import PlayerInputForm from '@/components/GameComponents/PlayerInputForm'
 export default {
   name: 'GameView',
   components: { PlayerInputForm }

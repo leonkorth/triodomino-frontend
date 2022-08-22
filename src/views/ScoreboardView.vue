@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import PlayerStatsTable from '@/components/PlayerStatsTable'
+import PlayerStatsTable from '@/components/StatsComponents/PlayerStatsTable'
 export default {
   name: 'ScoreboardView',
   components: { PlayerStatsTable },
