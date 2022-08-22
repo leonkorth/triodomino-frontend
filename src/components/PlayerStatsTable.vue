@@ -15,7 +15,7 @@
       <tbody>
       <tr v-for="(player,index) in this.players" :key="player.id">
         <th scope="row">{{index + 1}}</th>
-        <td>{{player.name}}</td>
+        <td>{{ capitalizeFirstLetter(player.name)}}</td>
         <td>{{player.gamesCount}}</td>
         <td>
           <span v-if="player.gamesCount > 0">{{ player.victories }} </span>
@@ -42,7 +42,12 @@
 <script>
 export default {
   name: 'PlayerStatsTable',
-  props: ['players']
+  props: ['players'],
+  methods: {
+    capitalizeFirstLetter (string) {
+      return string?.charAt(0).toUpperCase() + string?.slice(1)
+    }
+  }
 }
 </script>
 
